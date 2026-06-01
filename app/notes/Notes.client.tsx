@@ -12,7 +12,12 @@ import NoteForm from '@/components/NoteForm/NoteForm';
 import Modal from '@/components/Modal/Modal';
 import css from './Notes.module.css';
 
-export default function NotesClient() {
+interface NotesClientProps {
+  initialTag?: string;
+  isFilterPage?: boolean;
+}
+
+export default function NotesClient({ initialTag = '', isFilterPage = false }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
 
@@ -24,13 +29,13 @@ export default function NotesClient() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data } = useQuery({
-    queryKey: ['notes', search, page],
-    queryFn: () => fetchNotes(search, page),
+    queryKey: ['notes', search, page, initialTag],
+    queryFn: () => fetchNotes(search, page, initialTag || undefined),
     placeholderData: keepPreviousData,
   });
 
   return (
-    <div className={css.app}>
+    <div className={`${css.app} ${isFilterPage ? css.filterApp : ''}`}>
       <header className={css.toolbar}>
         <SearchBox value={search} onChange={(value) => debouncedSetSearch(value)} />
 

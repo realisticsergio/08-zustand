@@ -6,6 +6,13 @@
   flex: 1;
 }
 
+.filterApp {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 16px 24px 32px;
+}
+
 .toolbar {
   margin-bottom: 16px;
   display: flex;

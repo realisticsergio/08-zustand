@@ -14,24 +14,28 @@ const instance = axios.create({
   },
 });
 
-export const fetchNotes = async (query: string, page?: number): Promise<NOTEHUBResponse> => {
-  const response = await instance.get<NOTEHUBResponse>('/notes', {
-    params: { search: query, page },
+export const fetchNotes = async (query: string, page: number, tag?: string) => {
+  const { data } = await instance.get<NOTEHUBResponse>('/notes', {
+    params: {
+      search: query,
+      page,
+      ...(tag && { tag }),
+    },
   });
-  return response.data;
+  return data;
 };
 
 export const createNote = async (newPost: NoteFormValues): Promise<Note> => {
-  const response = await instance.post<Note>('/notes', newPost);
-  return response.data;
+  const { data } = await instance.post<Note>('/notes', newPost);
+  return data;
 };
 
 export const deleteNote = async (id: string): Promise<Note> => {
-  const response = await instance.delete<Note>(`/notes/${id}`);
-  return response.data;
+  const { data } = await instance.delete<Note>(`/notes/${id}`);
+  return data;
 };
 
 export const fetchNoteById = async (id: string): Promise<Note> => {
-  const response = await instance.get<Note>(`/notes/${id}`);
-  return response.data;
+  const { data } = await instance.get<Note>(`/notes/${id}`);
+  return data;
 };
