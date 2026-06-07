@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'NoteHub - Best Note Management App',
     description: 'Organize your thoughts, tasks, and daily meetings with NoteHub.',
+    url: 'https://08-zustand-weld-one.vercel.app/',
     images: [{ url: OG_IMAGE }],
     type: 'website',
   },
